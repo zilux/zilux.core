@@ -10,7 +10,8 @@ license: MIT
 tags:
   - provisiong
   - report 
-dependencies: {}
+dependencies: 
+  - community.general
 repository: https://github.com/acme/webserver
 documentation: https://github.com/acme/webserver/tree/main/docs
 issues: https://github.com/acme/webserver/issues
