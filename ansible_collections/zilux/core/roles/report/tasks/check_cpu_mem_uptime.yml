@@ -3,7 +3,6 @@
 
   when: setup_ok|bool
   block:
-
     - name: Uptime
       ansible.builtin.set_fact:
         uptime: "{{ (ansible_uptime_seconds / 86400) | round(0) | int }}"

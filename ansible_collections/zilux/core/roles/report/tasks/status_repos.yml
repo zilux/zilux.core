@@ -19,7 +19,6 @@
       when: '"HTTPS Error 404" not in repo_outcome.stderr'
 
   rescue:
-
     - name: Set fact status_repo default
       ansible.builtin.set_fact:
-        status_repo: '-'
+        status_repo: "-"

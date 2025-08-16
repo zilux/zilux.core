@@ -6,7 +6,7 @@
 - name: Minimal setup
   become: true
   ansible.builtin.setup:
-    # gather_timeout: 60
+  # gather_timeout: 60
   async: "{{ async_delay }}"
   poll: "{{ poll_count }}"
 

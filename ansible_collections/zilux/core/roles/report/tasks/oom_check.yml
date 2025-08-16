@@ -1,5 +1,4 @@
 ---
-
 - name: Check oom killer was active
   block:
     - name: Run dmesg
@@ -12,11 +11,9 @@
       no_log: false
       become: true
   rescue:
-    - name: Set empty result if grep fails    
+    - name: Set empty result if grep fails
       ansible.builtin.set_fact:
-        oom: { rc: 1, stdout: '', stderr: '' } 
-
-- debug: var=oom          
+        oom: { rc: 1, stdout: "", stderr: "" }
 
 - name: Set_fact oom_last_outcome
   ansible.builtin.set_fact:

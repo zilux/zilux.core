@@ -1,3 +1,4 @@
+---
 driver:
   name: default
   options:
@@ -15,8 +16,8 @@ platforms:
   - name: harry-dev-oom
     image: registry.access.redhat.com/ubi9/ubi-init
     volume:
-      -  /sys/fs/cgroup:/sys/fs/cgroup:rw
-    priviledged: true    
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
+    priviledged: true
     cap_add:
       - CAP_SYSLOG
       - CAP_SYS_ADMIN
@@ -28,26 +29,26 @@ provisioner:
       inventory: ./inventory
       stdout_callback: yaml
       roles_path: ../../roles
-      deprecation_warnings: False
+      deprecation_warnings: false
       remote_user: root
       local_tmp: /tmp/.ansitemp
-        # playbooks:
-        #converge: ../../../../playbooks/run_report.yml    
-    # create: ../../../../playbooks/test_play.yml     
-  #env:
-    # ANSIBLE_ROLES_PATH: "${MOLECULE_PROJECT_DIRECTORY}/roles"
-    # ANSIBLE_COLLECTIONS_PATH: "${MOLECULE_PROJECT_DIRECTORY}/../.."
- 
+    # playbooks:
+    #   converge: ../../../../playbooks/run_report.yml
+    #   create: ../../../../playbooks/test_play.yml
+    # env:
+    #   ANSIBLE_ROLES_PATH: "${MOLECULE_PROJECT_DIRECTORY}/roles"
+    #   ANSIBLE_COLLECTIONS_PATH: "${MOLECULE_PROJECT_DIRECTORY}/../.."
+
 scenario:
   name: oom
   test_sequence:
-  #- destroy
-  - dependency
-  - create
-  #- prepare
-  - converge
-  - verify
-  #- destroy
+  # - destroy
+    - dependency
+    - create
+  # - prepare
+    - converge
+    - verify
+  # - destroy
 
 verifier:
   name: ansible

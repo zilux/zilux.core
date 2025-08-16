@@ -1,6 +1,6 @@
 ---
 - name: Check rpmdb
-  ansible.builtin.yum:
+  ansible.builtin.dnf:
     list: zsh
   ignore_errors: true
   register: rpmdb

@@ -1,3 +1,4 @@
+---
 # 🔐 One-time setup
 #
 #    Get your Galaxy API key from galaxy.ansible.com -> My CONTENT -> API KEY
@@ -12,19 +13,18 @@ name: Ansible Collection CI + Release (Multi‑Version)
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
   release:
     types: [published]
-
 jobs:
   lint-test:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        ansible-version: ['2.14', '2.15', '2.16']  # Extend as needed
+        ansible-version: ["2.14", "2.15", "2.16"] # Extend as needed
     steps:
       - name: 🛎️ Checkout code
         uses: actions/checkout@v4
@@ -32,7 +32,7 @@ jobs:
       - name: 🐍 Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: "3.11"
 
       - name: 📦 Install Ansible ${{ matrix.ansible-version }} + lint tools
         run: |
@@ -59,7 +59,7 @@ jobs:
       - name: 🐍 Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: "3.11"
 
       - name: 📦 Install Ansible Galaxy tools
         run: |
@@ -77,4 +77,3 @@ jobs:
         run: |
           cd ansible_collections/<namespace>/<collection_name>
           ansible-galaxy collection publish *.tar.gz --api-key "$ANSIBLE_GALAXY_API_KEY"
-

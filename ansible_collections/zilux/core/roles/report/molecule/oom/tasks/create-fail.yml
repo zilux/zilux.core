@@ -1,3 +1,4 @@
+---
 - name: Retrieve container log
   ansible.builtin.command:
     cmd: >-
@@ -5,7 +6,7 @@
       podman logs
       {% endraw %}
       {{ item.stdout_lines[0] }}
-    # podman inspect --format='{{.HostConfig.LogConfig.Path}}'
+  # podman inspect --format='{{.HostConfig.LogConfig.Path}}'
   changed_when: false
   register: logfile_cmd
 

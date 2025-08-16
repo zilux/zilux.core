@@ -1,9 +1,7 @@
 ---
-
 - name: Block for creating uuid - header and list with keys of stored 'return' values
   run_once: true
   block:
-
     - name: Create random uuid
       ansible.builtin.set_fact:
         dest_cvs: "/home/harry/{{ 999999999999999999995 | random | to_uuid }}.csv"
@@ -11,33 +9,25 @@
 
     - name: Create header
       ansible.builtin.set_fact:
-        header: "{{ header | default('hostname') + ',' + item.header }} "
+        header: "{{ header | default('hostname') + ',' + my_item.header }} "
       loop: "{{ run_tasks }}"
       loop_control:
+        loop_var: my_item
         label: "{{ item.header }}"
 
     - name: Create list with keys where task_results are stored
       ansible.builtin.set_fact:
-        ar: "{{ ar | default(['inventory_hostname']) + item.outcome_in }}"
+        ar: "{{ ar | default(['inventory_hostname'],true) + my_item.outcome_in }}"
       loop: "{{ run_tasks }}"
       loop_control:
+        loop_var: my_item
         label: "{{ item.outcome_in }}"
-
-- name: Print stuff
-  debug:
-    msg: "{{ ansible_play_hosts_all | type_debug }}"       
-
-- debug: 
-    msg: xx{{ansible_play_hosts_all}}xx      
-- debug: var=ar
-
 
 - name: Show info when not mailed
   run_once: true
   delegate_to: "{{ delegate_host }}"
   when: not must_mail|bool
   block:
-
     - name: Create header for cvs
       ansible.builtin.debug:
         msg: "{{  header | replace(\"'\", '') }}"
@@ -49,15 +39,13 @@
         queried: "{{ ar | to_json }}"
       loop: "{{ ansible_play_hosts_all }}"
       loop_control:
-        loop_var: my_item  
-
+        loop_var: my_item
 
 - name: Create cvs and mail him
   run_once: true
   delegate_to: "{{ delegate_host }}"
   when: must_mail|bool
   block:
-
     - name: Create file with header
       ansible.builtin.copy:
         content: "{{ header | replace(\"'\", '') }}"
@@ -83,9 +71,9 @@
         from: Ansible
         host: mail.qrom.nl
         body: |
-              {{ body_msg | default('status baseline Servers', true) }}
-              ----------------------------
-              Regards: Tower
+          {{ body_msg | default('status baseline Servers', true) }}
+          ----------------------------
+          Regards: Tower
         to: "{{ email_to }}"
         attach: "{{ dest_cvs }}"
         subject: "{{ mail_subject | default('baseline status', true) }}"

@@ -2,7 +2,6 @@
 - name: Check Swap-space
 
   block:
-
     - name: Check meminfo
       ansible.builtin.shell:
         cmd: set -o pipefail && cat /proc/meminfo | grep -e MemAvailable -e SwapTotal -e SwapFree
