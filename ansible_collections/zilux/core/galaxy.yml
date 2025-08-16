@@ -11,7 +11,7 @@ tags:
   - provisiong
   - report 
 dependencies: 
-  name: community.general
+community.general: '>=7.2.1' 
 
 repository: https://github.com/acme/webserver
 documentation: https://github.com/acme/webserver/tree/main/docs
