@@ -1,0 +1,16 @@
+namespace: zilux
+name: core
+version: 1.0.0
+readme: README.md
+authors:
+  - Harry Zijlmans harry.zijlmans@gmail.com 
+description: >
+  Ansible Collection for core uses by me.
+license: MIT
+tags:
+  - provisiong
+  - report 
+dependencies: {}
+repository: https://github.com/acme/webserver
+documentation: https://github.com/acme/webserver/tree/main/docs
+issues: https://github.com/acme/webserver/issues
