@@ -21,7 +21,7 @@
       loop: "{{ run_tasks }}"
       loop_control:
         loop_var: my_item
-        label: "{{ item.outcome_in }}"
+        label: "{{ my_item.outcome_in }}"
 
 - name: Show info when not mailed
   run_once: true
