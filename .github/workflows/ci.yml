@@ -1,13 +1,56 @@
-name: Ansible Collection CI
+# 🔐 One-time setup
+#
+#    Get your Galaxy API key from galaxy.ansible.com -> My CONTENT -> API KEY
+#
+# In your GitHub repo, go to Settings → Secrets and variables → Actions → New repository secret:
+#
+#    Name: ANSIBLE_GALAXY_API_KEY
+#
+#    Value: (paste your key)    
+
+name: Ansible Collection CI + Release (Multi‑Version)
 
 on:
   push:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+  release:
+    types: [published]
 
 jobs:
   lint-test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        ansible-version: ['2.14', '2.15', '2.16']  # Extend as needed
+    steps:
+      - name: 🛎️ Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 📦 Install Ansible ${{ matrix.ansible-version }} + lint tools
+        run: |
+          python -m pip install --upgrade pip
+          pip install "ansible-core==${{ matrix.ansible-version }}" ansible-lint yamllint pytest
+
+      - name: ✅ YAML lint
+        run: yamllint .
+
+      - name: ✅ Ansible lint
+        run: ansible-lint ansible_collections/
+
+      - name: 🧪 Run tests
+        run: pytest -vv
+
+  build-publish:
+    needs: lint-test
+    if: github.event_name == 'release'
     runs-on: ubuntu-latest
     steps:
       - name: 🛎️ Checkout code
@@ -18,16 +61,20 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: 📦 Install Ansible + lint tools
+      - name: 📦 Install Ansible Galaxy tools
         run: |
           python -m pip install --upgrade pip
-          pip install ansible-core ansible-lint yamllint pytest
+          pip install ansible-core
 
-      - name: ✅ YAML lint
-        run: yamllint .
+      - name: 📦 Build Collection
+        run: |
+          cd ansible_collections/<namespace>/<collection_name>
+          ansible-galaxy collection build --force
 
-      - name: ✅ Ansible lint
-        run: ansible-lint ansible_collections/
+      - name: 🚀 Publish to Galaxy
+        env:
+          ANSIBLE_GALAXY_API_KEY: ${{ secrets.ANSIBLE_GALAXY_API_KEY }}
+        run: |
+          cd ansible_collections/<namespace>/<collection_name>
+          ansible-galaxy collection publish *.tar.gz --api-key "$ANSIBLE_GALAXY_API_KEY"
 
-      - name: 🧪 Run tests
-        run: pytest -vv
