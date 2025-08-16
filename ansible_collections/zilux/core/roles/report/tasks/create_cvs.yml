@@ -12,8 +12,8 @@
         header: "{{ header | default('hostname') + ',' + my_item.header }} "
       loop: "{{ run_tasks }}"
       loop_control:
+        label: "{{ my_item.header }}"
         loop_var: my_item
-        label: "{{ item.header }}"
 
     - name: Create list with keys where task_results are stored
       ansible.builtin.set_fact:
