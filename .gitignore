@@ -1,0 +1,25 @@
+# ADE / Python venv
+.venv/
+__pycache__/
+*.pyc
+.ansible
+.ansible/
+.bash_history
+
+# Ansible Galaxy cache
+.cache/
+collections/ansible_collections/.cache/
+collections/ansible_collections/*/*/.python-version
+
+# VS Code devcontainer
+.devcontainer/
+.vscode/
+
+# Molecule
+molecule/default/.molecule/
+
+# Test en lint artefacten
+*.log
+*.retry
+.coverage
+
