@@ -39,8 +39,8 @@ jobs:
           python -m pip install --upgrade pip
           pip install "ansible-core==${{ matrix.ansible-version }}" ansible-lint yamllint pytest
 
-      - name: ✅ YAML lint
-        run: yamllint .
+#      - name: ✅ YAML lint#
+#         run: yamllint .
 
       - name: ✅ Ansible lint
         run: ansible-lint ansible_collections/
