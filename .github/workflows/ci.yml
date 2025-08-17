@@ -75,5 +75,5 @@ jobs:
         env:
           ANSIBLE_GALAXY_API_KEY: ${{ secrets.ANSIBLE_GALAXY_API_KEY }}
         run: |
-          cd ansible_collections/<namespace>/<collection_name>
+          cd ansible_collections/zilux/core
           ansible-galaxy collection publish *.tar.gz --api-key "$ANSIBLE_GALAXY_API_KEY"
