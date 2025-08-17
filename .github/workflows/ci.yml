@@ -68,7 +68,7 @@ jobs:
 
       - name: 📦 Build Collection
         run: |
-          cd ansible_collections/<namespace>/<collection_name>
+          cd ansible_collections/zilux/core
           ansible-galaxy collection build --force
 
       - name: 🚀 Publish to Galaxy
