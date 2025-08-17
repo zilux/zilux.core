@@ -17,7 +17,7 @@
 
     - name: Create list with keys where task_results are stored
       ansible.builtin.set_fact:
-        ar: "{{ ar | default(['inventory_hostname'] ,true) + my_item.outcome_in }}"
+        ar: "{{ ar | default(['inventory_hostname'], true) + my_item.outcome_in }}"
       loop: "{{ run_tasks }}"
       loop_control:
         loop_var: my_item
