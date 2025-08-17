@@ -24,7 +24,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        ansible-version: ["2.14", "2.15", "2.16"] # Extend as needed
+        ansible-version: ["2.18", "2.19"] # Extend as needed
     steps:
       - name: 🛎️ Checkout code
         uses: actions/checkout@v4
