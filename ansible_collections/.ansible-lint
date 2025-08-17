@@ -22,4 +22,9 @@ var_naming_pattern: "^[a-z_][a-z0-9_]*$"
 # Enable checking of loop variable prefixes in roles
 loop_var_prefix: "^(__|{role}_)"
 
+exclude_paths:
+  - .venv/
+  - molecule/
+  - tests/
+
 offline: true
