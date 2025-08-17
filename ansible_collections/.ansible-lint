@@ -1,0 +1,25 @@
+# Using local configuration files
+# Specify Ansible-lint configuration in either .ansible-lint, .config/ansible-lint.yml, or .config/ansible-lint.yaml in your current working directory.
+# ansible-lint -L to see all rules
+
+warn_list:
+  - yaml[line-length]
+  - fqcn[action-core]
+  - yaml[trailing-spaces]
+
+skip_list:
+  - jinja[invalid]
+  - schema[meta-runtime]
+  - loop-var-prefix[missing]
+  - run-once[task]
+  - no-changed-when
+  - galaxy[no-changelog]
+  - var-naming[no-role-prefix]
+  - loop-var-prefix[wrong]
+
+var_naming_pattern: "^[a-z_][a-z0-9_]*$"
+
+# Enable checking of loop variable prefixes in roles
+loop_var_prefix: "^(__|{role}_)"
+
+offline: true
