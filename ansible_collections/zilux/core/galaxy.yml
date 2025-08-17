@@ -15,6 +15,7 @@ tags:
   - report
 dependencies:
   community.general: ">=7.2.1"
+  containers.podman: ">=1.17.0"
 
 repository: https://github.com/acme/webserver
 documentation: https://github.com/acme/webserver/tree/main/docs
