@@ -7,7 +7,7 @@
 #
 #    Name: ANSIBLE_GALAXY_API_KEY
 #
-#    Value: (paste your key)    
+#    Value: (paste your key)
 
 name: Ansible Collection CI + Release (Multi‑Version)
 

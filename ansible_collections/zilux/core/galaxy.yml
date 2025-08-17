@@ -7,12 +7,14 @@ authors:
   - Harry Zijlmans harry.zijlmans@gmail.com
 description: >
   Ansible Collection for core uses by me.
-license: MIT
+license:
+  - MIT
 tags:
+  - application
   - provisiong
   - report
 dependencies:
-community.general: ">=7.2.1"
+  community.general: ">=7.2.1"
 
 repository: https://github.com/acme/webserver
 documentation: https://github.com/acme/webserver/tree/main/docs
