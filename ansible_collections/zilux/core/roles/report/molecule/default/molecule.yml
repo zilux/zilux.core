@@ -14,7 +14,25 @@ dependency:
 
 platforms:
   - name: harry-dev
-    image: registry.access.redhat.com/ubi9/ubi-init
+    # image: localhost/zilux-ansible-dev:latest
+    image: localhost/zilux-dev:latest
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      - /etc/pki/entitlement:/etc/pki/entitlement:ro
+      - /usr/share/rhel/secrets:/usr/share/rhel/secrets:ro
+      - /etc/yum.repos.d:/etc/yum.repos.d:ro
+      - /etc/rhsm:/etc/rhsm:ro
+      - /etc/ssl:/etc/ssl:ro
+ 
+  - name: harry-accep
+    image: localhost/zilux-dev:latest
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      - /etc/pki/entitlement:/etc/pki/entitlement:ro
+      - /usr/share/rhel/secrets:/usr/share/rhel/secrets:ro
+      - /etc/yum.repos.d:/etc/yum.repos.d:ro
+      - /etc/rhsm:/etc/rhsm:ro
+      - /etc/ssl:/etc/ssl:ro      
 
 provisioner:
   name: ansible
@@ -26,6 +44,7 @@ provisioner:
       deprecation_warnings: false
       remote_user: root
       local_tmp: /tmp/.ansitemp
+
     # playbooks:
     #  converge: ../../../../playbooks/run_report.yml
     #  create: ../../../../playbooks/test_play.yml
